@@ -9,33 +9,26 @@
 #'
 #' @examples
 #' data(mtcars)
-#' X <- as.matrix(mtcars[, c("cyl", "disp", "hp")])
-#' y <- mtcars[, "mpg"]
+#' X <- as.matrix(mtcars[, c('cyl', 'disp', 'hp')])
+#' y <- mtcars[, 'mpg']
 #' linreg(y, X)
 #'
 #' @export
 #'
 
 linmodEst <- function(x, y) {
-  ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
-  coef <- solve(t(x) %*% x) %*% t(x) %*% y
-  print(coef)
-  ## degrees of freedom and standard deviation of residuals
-  df <- nrow(x) - ncol(x)
-  sigma2 <- sum((y - x %*% coef) ^ 2) / df
-  ## compute sigma^2 * (x’x)^-1
-  vcov <- sigma2 * solve(t(x) %*% x)
-  colnames(vcov) <- rownames(vcov) <- colnames(x)
-  list(
-    coefficients = coef,
-    vcov = vcov,
-    sigma = sqrt(sigma2),
-    df = df
-  )
+    ## CC: crossprod or a QR decomposition (as in the original version) are more efficient
+    coef <- solve(t(x) %*% x) %*% t(x) %*% y
+    print(coef)
+    ## degrees of freedom and standard deviation of residuals
+    df <- nrow(x) - ncol(x)
+    sigma2 <- sum((y - x %*% coef)^2)/df
+    ## compute sigma^2 * (x’x)^-1
+    vcov <- sigma2 * solve(t(x) %*% x)
+    colnames(vcov) <- rownames(vcov) <- colnames(x)
+    list(coefficients = coef, vcov = vcov, sigma = sqrt(sigma2), df = df)
 }
 
-#Run:
-#data(cats, package = "MASS")
-#linmodEst(cbind(1, cats$Bwt), cats$Hwt)
+# Run: data(cats, package = 'MASS') linmodEst(cbind(1, cats$Bwt), cats$Hwt)
 
-#close the testIssue
+# close the testIssue
