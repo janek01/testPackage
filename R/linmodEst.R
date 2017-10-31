@@ -37,3 +37,5 @@ linmodEst <- function(x, y) {
 #Run:
 #data(cats, package = "MASS")
 #linmodEst(cbind(1, cats$Bwt), cats$Hwt)
+
+#Adjust for testIssue
