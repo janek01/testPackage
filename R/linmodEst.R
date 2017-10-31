@@ -39,3 +39,5 @@ linmodEst <- function(x, y) {
 #linmodEst(cbind(1, cats$Bwt), cats$Hwt)
 
 #close the testIssue
+
+#Add something new to the testBranch
