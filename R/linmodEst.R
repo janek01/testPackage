@@ -67,3 +67,7 @@ linmod.formula <- function(formula, data = list(), ...) {
 
 #Run: linmod(Hwt ~ - 1 + Bwt * Sex, data = cats)
 
+
+#TEST:
+#devtools::use_testthat()
+
