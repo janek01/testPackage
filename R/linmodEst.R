@@ -31,4 +31,36 @@ linmodEst <- function(x, y) {
 
 # Run: data(cats, package = 'MASS') linmodEst(cbind(1, cats$Bwt), cats$Hwt)
 
-# close the testIssue
+linmod <- function(x, ...)
+  UseMethod("linmod")
+
+linmod.default <- function(x, y, ...) {
+  x <- as.matrix(x)
+  y <- as.numeric(y)
+  est <- linmodEst(x, y)
+  est$fitted.values <- as.vector(x %*% est$coefficients)
+  est$residuals <- y - est$fitted.values
+  est$call <- match.call()
+  class(est) <- "linmod"
+  return(est)
+}
+
+print.linmod <- function(x, ...) {
+  cat("Call:\n")
+  print(x$call)
+  cat("\nCoefficients:\n")
+  print(x$coefficients)
+}
+
+linmod.formula <- function(formula, data = list(), ...) {
+  mf <- model.frame(formula = formula, data = data)
+  x <- model.matrix(attr(mf, "terms"), data = mf)
+  y <- model.response(mf)
+  est <- linmod.default(x, y, ...)
+  est$call <- match.call()
+  est$formula <- formula
+  return(est)
+}
+
+#Run: linmod(Hwt ~ - 1 + Bwt * Sex, data = cats)
+

@@ -19,8 +19,8 @@ Runs an OLS regression not unlike \code{\link{lm}}
 }
 \examples{
 data(mtcars)
-X <- as.matrix(mtcars[, c("cyl", "disp", "hp")])
-y <- mtcars[, "mpg"]
+X <- as.matrix(mtcars[, c('cyl', 'disp', 'hp')])
+y <- mtcars[, 'mpg']
 linreg(y, X)
 
 }
