@@ -34,6 +34,7 @@ linmodEst <- function(x, y) {
 linmod <- function(x, ...)
   UseMethod("linmod")
 
+#核心计算函数
 linmod.default <- function(x, y, ...) {
   x <- as.matrix(x)
   y <- as.numeric(y)
@@ -45,6 +46,7 @@ linmod.default <- function(x, y, ...) {
   return(est)
 }
 
+#定义输出
 print.linmod <- function(x, ...) {
   cat("Call:\n")
   print(x$call)
@@ -52,6 +54,7 @@ print.linmod <- function(x, ...) {
   print(x$coefficients)
 }
 
+#定义输出格式
 linmod.formula <- function(formula, data = list(), ...) {
   mf <- model.frame(formula = formula, data = data)
   x <- model.matrix(attr(mf, "terms"), data = mf)
